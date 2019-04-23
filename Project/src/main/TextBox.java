@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class TextBox extends GameObject {
 	
 	private String text;
-	
+
 	public TextBox(int x, int y) {
 		super(x,y, 100, 100);
 		text = "";
@@ -28,6 +28,14 @@ public class TextBox extends GameObject {
 	public void update() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 }
