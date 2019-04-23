@@ -38,7 +38,6 @@ public class Game {
 		h.add(h1);
 		h.add(h2);
 		h.add(mid);
-		h.add(h1);
 		h.add(textString);
 	}
 	
