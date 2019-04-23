@@ -36,7 +36,7 @@ public class Card extends GameObject {
 	
 	public Card(int x, int y, int suit, int number)
 	{
-		super(x, y);
+		super(x, y, WIDTH, HEIGHT);
 		this.suit = suit;
 		this.number = number;
 		
@@ -126,9 +126,5 @@ public class Card extends GameObject {
 
 	public void setHidden(boolean isHidden) {
 		this.isHidden = isHidden;
-	}
-	
-	public boolean hitClip(int x, int y) {
-		return (this.x < x && x < this.x + WIDTH) && (this.y < y && y < this.y + HEIGHT);
 	}
 }
