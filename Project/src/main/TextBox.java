@@ -1,10 +1,13 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class TextBox extends GameObject {
 	
 	private String text;
+	
+	private final int PAD = 15;
 
 	public TextBox(int x, int y) {
 		super(x,y, 100, 100);
@@ -20,7 +23,10 @@ public class TextBox extends GameObject {
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
+		
+		g.setColor(Color.DARK_GRAY);
+		g.drawRect(x, y, width, height);
+		
 		
 	}
 

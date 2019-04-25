@@ -29,6 +29,8 @@ public abstract class GameObject {
 	public GameObject(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.width = 0;
+		this.height = 0;
 		selected = false;
 	}
 	
@@ -73,6 +75,8 @@ public abstract class GameObject {
 	}
 	
 	public boolean hitClip(int x, int y) {
+		//System.out.println("this-x: " + this.x + '\n' + "x: " + x + '\n' + "width: " + width + '\n' + "this-y: " + this.y + '\n' + "y: " + y + '\n' + "height: " + height);
+		//System.out.println("" + (this.x < x && x < this.x + width) + " " + (this.y < y && y < this.y + height) + '\n');
 		return (this.x < x && x < this.x + width) && (this.y < y && y < this.y + height);
 	}
 }

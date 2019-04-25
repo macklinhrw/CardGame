@@ -2,32 +2,46 @@ package main;
 
 public class Game {
 	
+	// for the engine
+	private Handler h;
+	
+	// GAME OBJECTS
 	private Deck d;
+	private TextBox tb;
+	
+	// players
 	private Player p1;
 	private Player p2;
-	private boolean playerTurn;
-	private Handler h;
+	
+	// hands
 	private Hand h1;
 	private Hand h2;
 	private Hand mid;
+	
+	// GAME VARIABLES
 	private int turnPhase;
 	private int turn;
 	private boolean enterText;
-	private Text textString;
+	private boolean playerTurn;
+	
+	
+	
+	
 //	private Text mouseCoord;
 	
 	public Game(Handler h)
 	{
-		textString = new Text("", 100, 500);
 		enterText = false;
 		d = new Deck();
 		p1 = new Player(false);
 		p2 = new Player(true);
-		h1 = new Hand(200, 300);
-		h2 = new Hand(200, 100);
-		mid = new Hand(200,200);
-		p1.setHand(mid);
-		p2.setHand(h1);
+		h1 = new Hand(200, 600);
+		h2 = new Hand(200, 200);
+		mid = new Hand(200,400);
+		tb = new TextBox(900, 500, 200, 30);
+		
+		p1.setHand(h1);
+		p2.setHand(h2);
 		playerTurn = true;
 		this.h = h;
 	}
@@ -38,7 +52,7 @@ public class Game {
 		h.add(h1);
 		h.add(h2);
 		h.add(mid);
-		h.add(textString);
+		h.add(tb);
 	}
 	
 	public void setup() {
@@ -59,9 +73,8 @@ public class Game {
 	}
 	
 	public void registerKey(String key) {
-		if(enterText && !key.equalsIgnoreCase("/")) {
-			textString.setString(textString.getString() + key);
-		} else if(key.equalsIgnoreCase("d") && canDraw()) {
+		
+		if(key.equalsIgnoreCase("d") && canDraw()) {
 			drawCard();
 		} else if(key.equalsIgnoreCase("s")) {
 			h1.shuffleCards(d);
@@ -70,9 +83,6 @@ public class Game {
 			setup();
 		} else if(key.equalsIgnoreCase("h")) {
 			h2.setHidden(!h2.isHidden());
-		} else if(key.equalsIgnoreCase("/")) {
-			textString.setString("");
-			enterText = !enterText;
 		}
 	}
 	
@@ -84,23 +94,31 @@ public class Game {
 //			h.add(mouseCoord);
 //		}
 //		mouseCoord.setString("X: " + x + ", Y: " + y);
-		int index = h1.getHit(x, y);
-		if(index != -1) {
-			Card c = h1.get(h1.getHit(x, y));
-			c.setHighlight(true);
-			p1.setSelectedCard(c);
-			p1.setSelectedCardIndex(index);
-			p1.setHovering(true);
-		} else if (p1.isHovering()) {
-			for(int i = 0; i < h1.numCards(); i++) {
-				Card c = h1.get(i);
-				p1.setSelectedCard(null);
-				p1.setSelectedCardIndex(-1);
-				c.setHighlight(false);
-			}
-			p1.setHovering(false);
-		}
 		
+		// For highlighting cards
+
+		
+		// TODO fix buggieness
+		GameObject go = h.hoverObject(x, y);
+		if(go != null && go instanceof Hand) {
+			Hand habs = (Hand) go;
+			int index = habs.getHit(x, y);
+			if(index != -1) {
+				Card c = habs.get(habs.getHit(x, y));
+				c.setHighlight(true);
+				p1.setSelectedCard(c);
+				p1.setSelectedCardIndex(index);
+				p1.setHovering(true);
+			} else if(p1.isHovering()){
+				for(int i = 0; i < habs.numCards(); i++) {
+					Card c = habs.get(i);
+					p1.setSelectedCard(null);
+					p1.setSelectedCardIndex(-1);
+					c.setHighlight(false);
+				}
+				p1.setHovering(false);
+			}
+		}
 		
 	}
 	

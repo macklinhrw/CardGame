@@ -24,8 +24,8 @@ public class Card extends GameObject {
 	private boolean isHidden;
 	
 	//graphic settings
-	public static final int WIDTH = 40;
-	public static final int HEIGHT = 50;
+	public static final int WIDTH = 80;
+	public static final int HEIGHT = 100;
 	
 	
 	public Card(int x, int y){
@@ -58,6 +58,10 @@ public class Card extends GameObject {
 	
 	public void render(Graphics g) {
 		
+		
+		Font temp = g.getFont();
+		g.setFont(g.getFont().deriveFont(18.0f));
+		
 		FontMetrics f = g.getFontMetrics();
 		String displayString = getNumRepr();
 		
@@ -76,6 +80,8 @@ public class Card extends GameObject {
 		} else {
 			g.drawString("?", x + (WIDTH / 2) - f.stringWidth("?") / 2, y + f.getHeight());
 		}
+		
+		g.setFont(temp);
 	}
 	
 	public String getSuitRepr()

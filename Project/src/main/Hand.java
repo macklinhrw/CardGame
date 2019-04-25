@@ -10,7 +10,7 @@ public class Hand extends GameObject {
 	
 	public Hand(int x, int y)
 	{
-		super(x,y);
+		super(x,y,0,Card.HEIGHT);
 	}
 	
 	public void resetCoords() {
@@ -26,6 +26,7 @@ public class Hand extends GameObject {
 		c.setHidden(isHidden);
 		cards.add(c);
 		resetCoords();
+		width += Card.WIDTH + 10;
 	}
 	
 	public Card get(int i)
@@ -36,6 +37,7 @@ public class Hand extends GameObject {
 	public Card remove(int i) {
 		Card c = cards.remove(i);
 		resetCoords();
+		width -= Card.WIDTH + 10;
 		return c;
 	}
 	
@@ -80,8 +82,9 @@ public class Hand extends GameObject {
 		return cards.size();
 	}
 	
+	
+	// TODO for point system
 	public int getValue(){
-		
 		return 0;
 	}
 

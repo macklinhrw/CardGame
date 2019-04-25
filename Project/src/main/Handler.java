@@ -37,4 +37,24 @@ public class Handler {
 	{
 		objects.add(o);
 	}
+	
+	/** 
+	 * Goes through objects list to
+	 * find object that mouse is currently
+	 * hovering over according to x, y params.
+	 * @param x Mouse x coordinate.
+	 * @param y Mouse y coordinate.
+	 * @return returns GameObject mouse is hovering over.
+	 * 
+	 */
+	
+	public GameObject hoverObject(int x, int y) {
+		
+		for(GameObject c : objects)
+		{
+			if(c.hitClip(x, y))
+				return c;
+		}
+		return null;
+	}
 }
