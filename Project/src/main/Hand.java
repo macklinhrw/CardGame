@@ -7,6 +7,8 @@ public class Hand extends GameObject {
 
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	private boolean isHidden;
+	private Card lastSelected;
+	private int lastSelectedIndex;
 	
 	public Hand(int x, int y)
 	{
@@ -91,6 +93,58 @@ public class Hand extends GameObject {
 	public void update() {
 //		for(Card c : cards)
 //			c.update();
+	}
+	
+	public void setHovering(boolean hovering) {
+		
+		if(hovering) {
+			int index = getHit(Game.mouseX, Game.mouseY);
+			if(index != -1) {
+				Card c = get(index);
+				if(lastSelected != null && lastSelected != c) {
+					lastSelected.setHovering(false);
+				}
+				lastSelected = c;
+				setLastSelectedIndex(index);
+				c.setHighlight(true);
+			}
+		} else {
+			if(lastSelected != null) {
+				lastSelected.setHovering(false);
+			}
+		}
+//		} else if(lastSelected != null) {
+//			setLastSelectedIndex(-1);
+//			lastSelected.setHighlight(false);
+//		}
+		
+		
+//		if(index != -1) {
+//			Card c = habs.get(habs.getHit(x, y));
+//			c.setHighlight(true);
+//			p1.setSelectedCard(c);
+//			p1.setSelectedCardIndex(index);
+//			p1.setHovering(true);
+//		} else if(p1.isHovering()){
+//			for(int i = 0; i < habs.numCards(); i++) {
+//				Card c = habs.get(i);
+//				p1.setSelectedCard(null);
+//				p1.setSelectedCardIndex(-1);
+//				c.setHighlight(false);
+//			}
+//			p1.setHovering(false);
+//		}
+		
+		
+		this.hovering = hovering;
+	}
+
+	public int getLastSelectedIndex() {
+		return lastSelectedIndex;
+	}
+
+	public void setLastSelectedIndex(int lastSelectedIndex) {
+		this.lastSelectedIndex = lastSelectedIndex;
 	}
 
 }

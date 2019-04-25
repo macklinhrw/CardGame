@@ -9,6 +9,7 @@ public abstract class GameObject {
 	protected int width;
 	protected int height;
 	protected boolean selected;
+	protected boolean hovering;
 	
 	public abstract void render(Graphics g);
 	
@@ -79,5 +80,15 @@ public abstract class GameObject {
 		//System.out.println("" + (this.x < x && x < this.x + width) + " " + (this.y < y && y < this.y + height) + '\n');
 		return (this.x < x && x < this.x + width) && (this.y < y && y < this.y + height);
 	}
+
+	public boolean isHovering() {
+		return hovering;
+	}
+
+	public void setHovering(boolean hovering) {
+		this.hovering = hovering;
+	}
+	
+	
 }
 

@@ -24,6 +24,9 @@ public class Game {
 	private boolean enterText;
 	private boolean playerTurn;
 	
+	public static int mouseX;
+	public static int mouseY;
+	
 	
 	
 	
@@ -99,34 +102,45 @@ public class Game {
 
 		
 		// TODO fix buggieness
+		mouseX = x;
+		mouseY = y;
 		GameObject go = h.hoverObject(x, y);
-		if(go != null && go instanceof Hand) {
-			Hand habs = (Hand) go;
-			int index = habs.getHit(x, y);
-			if(index != -1) {
-				Card c = habs.get(habs.getHit(x, y));
-				c.setHighlight(true);
-				p1.setSelectedCard(c);
-				p1.setSelectedCardIndex(index);
-				p1.setHovering(true);
-			} else if(p1.isHovering()){
-				for(int i = 0; i < habs.numCards(); i++) {
-					Card c = habs.get(i);
-					p1.setSelectedCard(null);
-					p1.setSelectedCardIndex(-1);
-					c.setHighlight(false);
-				}
-				p1.setHovering(false);
-			}
+		if(go != null) {
+			p1.setHoverObject(go);
+			go.setHovering(true);
+		} else {
+			p1.getHoverObject().setHovering(false);
+			p1.setHoverObject(null);
 		}
+		
+		
+		
+//		if(go != null && go instanceof Hand) {
+//			p1.setHoverObject((Hand) go);
+//			int index = habs.getHit(x, y);
+//			if(index != -1) {
+//				Card c = habs.get(habs.getHit(x, y));
+//				c.setHighlight(true);
+//				p1.setSelectedCard(c);
+//				p1.setSelectedCardIndex(index);
+//				p1.setHovering(true);
+//			} else if(p1.isHovering()){
+//				for(int i = 0; i < habs.numCards(); i++) {
+//					Card c = habs.get(i);
+//					p1.setSelectedCard(null);
+//					p1.setSelectedCardIndex(-1);
+//					c.setHighlight(false);
+//				}
+//				p1.setHovering(false);
+//			}
+//		}
 		
 	}
 	
 	public void registerClick(int x, int y) {
-		if(p1.isHovering()) {
-			int i = p1.getSelectedCardIndex();
+		if(p1.getHoverObject() instanceof Hand) {
+			int i = h1.getLastSelectedIndex();
 			Card c = h1.remove(i);
-			c.setHighlight(false);
 			d.add(c);
 			d.shuffle();
 			h1.drawCards(d, 1);
