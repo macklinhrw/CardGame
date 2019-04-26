@@ -106,12 +106,11 @@ public class Hand extends GameObject {
 				}
 				lastSelected = c;
 				setLastSelectedIndex(index);
-				c.setHighlight(true);
+				c.setHovering(true);
 			}
-		} else {
-			if(lastSelected != null) {
-				lastSelected.setHovering(false);
-			}
+		} else if(lastSelected != null) {
+			lastSelected.setHovering(false);
+			lastSelected = null;
 		}
 //		} else if(lastSelected != null) {
 //			setLastSelectedIndex(-1);

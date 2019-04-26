@@ -46,7 +46,7 @@ public class Main extends JFrame {
 	
 	//this is the rendering method
     public void paint(Graphics g) {
-    	g.setColor(getBackground());
+    	g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     	
         h.renderObjects(g);

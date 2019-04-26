@@ -98,17 +98,14 @@ public class Game {
 //		}
 //		mouseCoord.setString("X: " + x + ", Y: " + y);
 		
-		// For highlighting cards
 
-		
-		// TODO fix buggieness
 		mouseX = x;
 		mouseY = y;
 		GameObject go = h.hoverObject(x, y);
 		if(go != null) {
 			p1.setHoverObject(go);
 			go.setHovering(true);
-		} else {
+		} else if(p1.getHoverObject() != null) {
 			p1.getHoverObject().setHovering(false);
 			p1.setHoverObject(null);
 		}
@@ -139,11 +136,13 @@ public class Game {
 	
 	public void registerClick(int x, int y) {
 		if(p1.getHoverObject() instanceof Hand) {
-			int i = h1.getLastSelectedIndex();
-			Card c = h1.remove(i);
+			Hand h = (Hand)p1.getHoverObject();
+			int i = h.getLastSelectedIndex();
+			Card c = h.remove(i);
 			d.add(c);
 			d.shuffle();
-			h1.drawCards(d, 1);
+			h.drawCards(d, 1);
+			registerMouse(x,y);
 		}
 	}
 }

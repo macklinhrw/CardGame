@@ -65,6 +65,9 @@ public class Card extends GameObject {
 		FontMetrics f = g.getFontMetrics();
 		String displayString = getNumRepr();
 		
+		g.setColor(Color.WHITE);
+		g.fillRect(x, y, WIDTH, HEIGHT);
+		
 		if(isHidden) {
 			g.setColor(Color.DARK_GRAY);
 		} else {
@@ -72,7 +75,9 @@ public class Card extends GameObject {
 		}
 		if(isHighlighted)
 			g.setColor(Color.BLUE);
+		
 		g.drawRect(x, y, WIDTH, HEIGHT);
+		
 		
 		if(!isHidden) {
 			g.drawString(displayString, x + (WIDTH / 2) - f.stringWidth(displayString) / 2, y + f.getHeight());
@@ -118,6 +123,10 @@ public class Card extends GameObject {
 	
 	public void setHighlight(boolean isHighlighted) {
 		this.isHighlighted = isHighlighted;
+	}
+	
+	public void setHovering(boolean isHovering) {
+		this.isHighlighted = isHovering;
 	}
 	
 	public void update() {
