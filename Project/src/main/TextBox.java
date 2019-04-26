@@ -24,9 +24,14 @@ public class TextBox extends GameObject {
 	@Override
 	public void render(Graphics g) {
 		
+		g.setColor(Color.WHITE);
+		g.fillRect(x, y, width, height);
+		
 		g.setColor(Color.DARK_GRAY);
 		g.drawRect(x, y, width, height);
 		
+		g.setColor(Color.BLACK);
+		g.drawString(text, x+5, y+20);
 		
 	}
 

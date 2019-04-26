@@ -21,6 +21,7 @@ public class Hand extends GameObject {
 			c.setY(y);
 			c.setX(x + i * 10 + i * Card.WIDTH);
 		}
+		width = cards.size() * Card.WIDTH + (cards.size() - 1) * 10;
 	}
 	
 	public void add(Card c)
@@ -28,7 +29,6 @@ public class Hand extends GameObject {
 		c.setHidden(isHidden);
 		cards.add(c);
 		resetCoords();
-		width += Card.WIDTH + 10;
 	}
 	
 	public Card get(int i)
@@ -39,7 +39,6 @@ public class Hand extends GameObject {
 	public Card remove(int i) {
 		Card c = cards.remove(i);
 		resetCoords();
-		width -= Card.WIDTH + 10;
 		return c;
 	}
 	

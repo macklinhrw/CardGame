@@ -76,8 +76,13 @@ public class Game {
 	}
 	
 	public void registerKey(String key) {
-		
-		if(key.equalsIgnoreCase("d") && canDraw()) {
+		if(p1.getSelectedObject() != null && p1.getSelectedObject() instanceof TextBox) {
+			
+			TextBox t = (TextBox) p1.getSelectedObject();
+			t.setText(t.getText() + key);
+			
+			
+		} else if(key.equalsIgnoreCase("d") && canDraw()) {
 			drawCard();
 		} else if(key.equalsIgnoreCase("s")) {
 			h1.shuffleCards(d);
@@ -87,6 +92,7 @@ public class Game {
 		} else if(key.equalsIgnoreCase("h")) {
 			h2.setHidden(!h2.isHidden());
 		}
+		
 	}
 	
 	public void registerMouse(int x, int y) {
@@ -135,6 +141,15 @@ public class Game {
 	}
 	
 	public void registerClick(int x, int y) {
+		
+		// TODO fix null pointer
+		
+		if(p1.getSelectedObject() != null)
+		{
+			p1.getSelectedObject().setSelected(false);
+		}
+		p1.setSelectedObject(p1.getHoverObject());
+		p1.getHoverObject().setSelected(true);
 		if(p1.getHoverObject() instanceof Hand) {
 			Hand h = (Hand)p1.getHoverObject();
 			int i = h.getLastSelectedIndex();

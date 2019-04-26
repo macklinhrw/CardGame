@@ -7,6 +7,7 @@ public class Player {
 	private int points;
 	private GameObject hoverObject;
 	private boolean hasLost;
+	private GameObject selectedObject;
 	
 	public Player(boolean isComp)
 	{
@@ -44,5 +45,13 @@ public class Player {
 
 	public void setHoverObject(GameObject hoverObject) {
 		this.hoverObject = hoverObject;
+	}
+
+	public GameObject getSelectedObject() {
+		return selectedObject;
+	}
+
+	public void setSelectedObject(GameObject selectedObject) {
+		this.selectedObject = selectedObject;
 	}
 }
